@@ -18,10 +18,12 @@ import Menu from '~/components/Popper/Menu';
 import Image from '~/components/Images';
 import Search from '../Search';
 import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons';
+import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import routesConfig from '~/config/routes';
 
 import styles from './Header.module.scss';
 import classNames from 'classnames/bind';
-import { useState, useEffect } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -111,9 +113,9 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <div className={cx('logo')}>
+                <Link to={routesConfig.home} className={cx('logo')}>
                     <img src={images.logo.default} alt="tiktok" />
-                </div>
+                </Link>
 
                 <Search />
                 <div className={cx('actions')}>

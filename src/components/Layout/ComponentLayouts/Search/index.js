@@ -47,6 +47,19 @@ function Search() {
 
         fetchApi();
     }, [debounced]);
+
+    const handleChange = (e) => {
+        const searchValue = e.target.value;
+        if (searchValue.startsWith(' ')) {
+            return;
+        }
+        setSearchValue(searchValue);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    };
+
     return (
         <div>
             <HeadlessTippy
@@ -70,7 +83,7 @@ function Search() {
                         value={searchValue}
                         placeholder="Search account and videos"
                         spellCheck={false}
-                        onChange={(e) => setSearchValue(e.target.value)}
+                        onChange={handleChange}
                         onFocus={() => setShowResult(true)}
                     />
                     {!!searchValue && !loading && (
@@ -86,7 +99,7 @@ function Search() {
                         </button>
                     )}
                     {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
-                    <button className={cx('search-btn')}>
+                    <button className={cx('search-btn')} onMouseDown={handleSubmit}>
                         <SearchIcon />
                     </button>
                 </div>
