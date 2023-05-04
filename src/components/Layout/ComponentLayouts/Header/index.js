@@ -9,6 +9,7 @@ import {
     faSignOut,
     faUser,
 } from '@fortawesome/free-solid-svg-icons';
+import { faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
 import images from '~/assets/images';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
@@ -20,6 +21,7 @@ import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons';
 
 import styles from './Header.module.scss';
 import classNames from 'classnames/bind';
+import { useState, useEffect } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -91,6 +93,21 @@ function Header() {
         },
     ];
 
+    const [theme, setTheme] = useState('Light');
+    const handleMode = () => {
+        setTheme(theme === 'Light' ? 'Dark' : 'Light');
+    };
+
+    useEffect(() => {
+        if (theme === 'Dark') {
+            window.document.documentElement.classList.add('dark');
+            window.document.documentElement.classList.remove('light');
+        } else {
+            window.document.documentElement.classList.add('light');
+            window.document.documentElement.classList.remove('dark');
+        }
+    }, [theme]);
+
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -116,6 +133,15 @@ function Header() {
                                 <button className={cx('action-btn')}>
                                     <InboxIcon />
                                     <span className={cx('badge')}>12</span>
+                                </button>
+                            </Tippy>
+                            <Tippy delay={[0, 50]} content={theme === 'Light' ? 'Light' : 'Dark'} placement="bottom">
+                                <button className={cx('action-btn')} onClick={handleMode}>
+                                    {theme === 'Light' ? (
+                                        <FontAwesomeIcon className={cx('theme-mode')} icon={faSun} />
+                                    ) : (
+                                        <FontAwesomeIcon className={cx('theme-mode')} icon={faMoon} />
+                                    )}
                                 </button>
                             </Tippy>
                         </>
