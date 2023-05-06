@@ -20,7 +20,7 @@ import Search from '../Search';
 import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import routesConfig from '~/config/routes';
+import config from '~/config';
 
 import styles from './Header.module.scss';
 import classNames from 'classnames/bind';
@@ -113,7 +113,7 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Link to={routesConfig.home} className={cx('logo')}>
+                <Link to={config.routes.home} className={cx('logo')}>
                     <img src={images.logo.default} alt="tiktok" />
                 </Link>
 
